@@ -1,0 +1,43 @@
+<div class="container" fxLayout="column" fxLayoutGap="45px">
+  <form [formGroup]="myChartForm" (ngSubmit)="submit()" class="example-form">
+
+    <div formArrayName="points">
+      <h2> Add yours chart data</h2>
+      <div fxLayout fxLayoutGap="25px" fxLayoutAlign="center center"
+        *ngFor="let alias of pointsForms.controls; let i = index;" [formGroupName]="i">
+        <mat-form-field class="example-form-field" appearance="outline">
+          <mat-label>Point Number: {{i+1}}</mat-label>
+          <input matInput type="text" formControlName="pointNumber" [placeholder]="(i+1).toString()">
+        </mat-form-field>
+
+        <mat-form-field class="example-form-field" appearance="outline">
+          <mat-label>X axis</mat-label>
+          <input matInput type="text" formControlName="xAxis">
+        </mat-form-field>
+
+        <mat-form-field class="example-form-field" appearance="outline">
+          <mat-label>Y axis</mat-label>
+          <input matInput type="text" formControlName="yAxis">
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" (click)="deletePoint(i)">Delete point</button>
+      </div>
+    </div>
+
+
+    <button mat-raised-button color="primary" type="button" (click)="add()">Add point</button>
+  </form>
+
+  <div *ngIf="pointsForms.length" fxLayout="column" fxLayoutGap="45px">
+    <div>
+      <h2 class="text-primary">Table:</h2>
+      <app-table [dataSource]="dataSource | async"></app-table>
+    </div>
+    <div>
+      <h2 class="text-primary">Chart:</h2>
+      <app-chart [dataSource]="dataSource | async"></app-chart>
+    </div>
+
+  </div>
+
+</div>
