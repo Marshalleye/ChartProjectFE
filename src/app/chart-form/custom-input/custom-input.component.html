@@ -1,0 +1,20 @@
+<div [formGroup]="pointForm">
+  <div fxLayout.lt-md="column" fxLayoutGap.gt-sm="25px" fxLayoutAlign="center center" class="input-block">
+    <mat-form-field appearance="outline">
+      <mat-label>Point Number: {{pointNumber+1}}</mat-label>
+      <input matInput type="number" formControlName="pointNumber">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>X axis</mat-label>
+      <input matInput type="number" formControlName="xAxis">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Y axis</mat-label>
+      <input matInput type="number" formControlName="yAxis">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="removePoint()">Delete point</button>
+  </div>
+</div>

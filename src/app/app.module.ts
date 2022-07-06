@@ -4,22 +4,30 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
-import { CanvaCompComponent } from './canva-comp/canva-comp.component';
 import { MatIconModule } from '@angular/material/icon';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ChartsModule } from 'ng2-charts';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { TableComponent } from './canva-comp/table/table.component';
-import { ChartComponent } from './canva-comp/chart/chart.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { TableComponent } from './chart-form/table/table.component';
+import { ChartFormComponent } from './chart-form/chart-form.component';
+import { CustomInputComponent } from './chart-form/custom-input/custom-input.component';
+import { ChartComponent } from './chart-form/chart/chart.component';
 
 @NgModule({
-  declarations: [AppComponent, CanvaCompComponent, TableComponent, ChartComponent],
+  declarations: [
+    AppComponent,
+    ChartFormComponent,
+    TableComponent,
+    ChartComponent,
+    CustomInputComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -32,8 +40,9 @@ import { ChartComponent } from './canva-comp/chart/chart.component';
     MatToolbarModule,
     MatTableModule,
     MatIconModule,
-    ChartsModule,
+    MatCheckboxModule,
     FlexLayoutModule,
+    NgxChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
