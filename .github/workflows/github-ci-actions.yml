@@ -5,11 +5,11 @@ on:
   pull_request:
     branches: [master]
 jobs:
-  check-links:
+  Init:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [17.x]
+        node-version: [16.x]
     steps:
       - uses: actions/checkout@v3
       - name: Starting Node.js  ${{ matrix.node-version }}
@@ -19,6 +19,6 @@ jobs:
       - name: install modules
         run: npm install
       - name: build project
-        run: npm build
+        run: npm run build
       - name: unit test
         run: npm test
