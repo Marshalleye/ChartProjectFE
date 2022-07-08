@@ -11,17 +11,15 @@
 
     <!-- Add Tab button start -->
     <div fxLayoutGap="15px">
-      <button mat-raised-button class="add-tab-button" color="primary" (click)="addTab(selectAfterAdding.checked)"
+      <button mat-raised-button class="add-tab-button" color="primary" (click)="addTab()"
         [disabled]="isTabNameExist(tabNameInputValue)">
         Add new chart
       </button>
-      <mat-checkbox #selectAfterAdding> Select tab after adding </mat-checkbox>
     </div>
     <!-- Add Tab button end -->
 
-    <!-- formArrayName="tabs" start -->
     <div formArrayName="tabs">
-      <mat-tab-group (selectedIndexChange)="changeMatGroup()">
+      <mat-tab-group>
         <mat-tab *ngFor="let tabs of getTabs(mainChartForm); let tabsIndex = index" [label]="tabsNameArr[tabsIndex]">
           <div class="chart-points-container" fxLayout="column" fxLayoutGap="15px">
 
@@ -35,23 +33,15 @@
             <!-- Delete Tab button end -->
 
             <div [formGroupName]="tabsIndex">
-              <!-- formArrayName="tab" start -->
-              <div formArrayName="tab">
-                <div [formGroupName]="tabIndex" *ngFor="let tab of getTab(tabs); let tabIndex = index">
-                  <!-- formArrayName="points" start -->
-                  <div formArrayName="points">
-                    <div [formGroupName]="pointIndex" *ngFor="let point of getPoints(tab); let pointIndex =index">
-                      <app-custom-input [tabNumber]="tabsNameArr.length" [pointNumber]="pointIndex"
-                        (deletePoint)="removePoints(tabsIndex, tabIndex, $event)" formControlName="point">
-                      </app-custom-input>
-                    </div>
-                  </div>
-                  <!-- formArrayName="points" end -->
-                  <button mat-raised-button color="primary" type="button" (click)="addPoint(tabsIndex, tabIndex)">Add
-                    point</button>
+              <div formArrayName="pointsInTab">
+                <div [formGroupName]="pointIndex" *ngFor="let point of getPoints(tabs); let pointIndex =index">
+                  <app-custom-input [tabNumber]="tabsNameArr.length" [pointNumber]="pointIndex"
+                    (deletePoint)="removePoints(tabsIndex, $event)" formControlName="point">
+                  </app-custom-input>
                 </div>
+                <button mat-raised-button color="primary" type="button" (click)="addPoint(tabsIndex)">Add
+                  point</button>
               </div>
-              <!-- formArrayName="tab" end -->
             </div>
           </div>
 

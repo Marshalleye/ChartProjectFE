@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import {
   ChartAxisPoint,
-  ChartPointModel,
-  TabModel,
+  ChartPointControlModel,
   TabsModel,
 } from '../shared/model/model';
 
@@ -21,14 +20,14 @@ export class TableComponent {
     this.tableData = this.tableDataMapper(tableData);
   }
 
-  public tableData: ChartPointModel[];
+  public tableData: ChartAxisPoint[];
 
   public displayedColumns: string[] = ['pointNumber', 'xAxis', 'yAxis'];
 
-  private tableDataMapper(tableData: TabsModel): ChartPointModel[] {
-    return tableData.tabs[this.tabNumber].tab[0].points.map(
-      (tablePoint: ChartPointModel) => {
-        return tablePoint;
+  private tableDataMapper(tableData: TabsModel): ChartAxisPoint[] {
+    return tableData.tabs[this.tabNumber].pointsInTab.map(
+      ({ point }: ChartPointControlModel) => {
+        return point;
       }
     );
   }

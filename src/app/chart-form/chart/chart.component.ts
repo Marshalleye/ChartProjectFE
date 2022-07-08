@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import {
-  ChartAxisPoint,
-  ChartPointModel,
+  ChartPointControlModel,
   TabData,
   TabsModel,
 } from '../shared/model/model';
@@ -29,18 +28,9 @@ export class ChartComponent {
   public chartDataCollection: ChartDataCollectionModel[] = [
     {
       name: 'Default',
-      series: [
-        {
-          name: 0,
-          value: 0,
-        },
-      ],
+      series: this.initChartAxisData(),
     },
   ];
-
-  colorScheme: any = {
-    domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5'],
-  };
 
   public onResize(event: Event): void {
     this.view = [(event.target as Window).innerWidth / 1.35, 400];
@@ -49,23 +39,36 @@ export class ChartComponent {
   private setChartData({ tabs }: TabsModel): void {
     for (let i = 0; i < tabs.length; i++) {
       this.chartDataCollection.splice(i, 1, this.chartMapper(tabs[i]));
-      this.chartDataCollection = [...this.chartDataCollection];
     }
+    this.chartDataCollection = [...this.chartDataCollection];
   }
 
   private chartMapper(item: TabData): ChartDataCollectionModel {
     return {
       name: item.tabName,
-      series: this.pointsMapper(item.tab[0].points),
+      series: this.pointsMapper(item.pointsInTab),
     };
   }
 
-  private pointsMapper(pointsArray: ChartPointModel[]): ChartAxisData[] {
-    return pointsArray.map(({ point }: ChartPointModel) => {
+  private pointsMapper(pointsArray: ChartPointControlModel[]): ChartAxisData[] {
+    if (!pointsArray.length) {
+      return this.initChartAxisData();
+    }
+
+    return pointsArray.map(({ point }: ChartPointControlModel) => {
       return {
         name: point?.xAxis ?? 0,
         value: point?.yAxis ?? 0,
       };
     });
+  }
+
+  private initChartAxisData(): ChartAxisData[] {
+    return [
+      {
+        name: 0,
+        value: 0,
+      },
+    ];
   }
 }

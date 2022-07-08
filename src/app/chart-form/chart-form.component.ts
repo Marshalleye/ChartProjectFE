@@ -10,7 +10,6 @@ import { TabsModel } from './shared/model/model';
 })
 export class ChartFormComponent implements OnInit {
   public dataSource$: Observable<TabsModel>;
-  public selectedMatGroup = 0;
   public mainChartForm: FormGroup;
   public tabNameInput = new FormControl('First Chart');
   public tabsNameArr: string[] = ['First Chart'];
@@ -27,7 +26,7 @@ export class ChartFormComponent implements OnInit {
     this.dataSource$ = this.mainChartForm.valueChanges;
   }
 
-  public addTab(selectAfterAdding: boolean): void {
+  public addTab(): void {
     if (this.tabNameInputValue) {
       this.tabsNameArr.push(this.tabNameInputValue.toString().trim());
 
@@ -36,29 +35,24 @@ export class ChartFormComponent implements OnInit {
       control.push(this.initTab());
     }
 
-    if (selectAfterAdding) {
-      this.tabNameInput.setValue(this.tabsNameArr.length - 1);
-    }
+    this.tabNameInput.reset();
   }
 
-  public addPoint(tabsIndex: number, tabIndex: number): void {
-    const control = (
-      (this.mainChartForm.get('tabs') as FormArray).controls[tabsIndex].get(
-        'tab'
-      ) as FormArray
-    ).controls[tabIndex].get('points') as FormArray;
+  public addPoint(tabsIndex: number): void {
+    const control = (this.mainChartForm.get('tabs') as FormArray).controls[
+      tabsIndex
+    ].get('pointsInTab') as FormArray;
 
-    control.push(this.initPoint());
+    control.push(this.initPointInTab());
   }
 
   public getTabs(form: FormGroup): FormGroup[] {
     return (form.controls.tabs as FormArray).controls as Array<FormGroup>;
   }
-  public getTab(form: FormGroup): FormGroup[] {
-    return (form.controls.tab as FormArray).controls as Array<FormGroup>;
-  }
+
   public getPoints(form: FormGroup): FormGroup[] {
-    return (form.controls.points as FormArray).controls as Array<FormGroup>;
+    return (form.controls.pointsInTab as FormArray)
+      .controls as Array<FormGroup>;
   }
 
   public removeTab(tabsIndex: number): void {
@@ -69,20 +63,12 @@ export class ChartFormComponent implements OnInit {
     this.tabsNameArr.splice(tabsIndex, 1);
   }
 
-  public removePoints(
-    tabsIndex: number,
-    tabIndex: number,
-    pointIndex: number
-  ): void {
+  public removePoints(tabsIndex: number, pointIndex: number): void {
     const control = <FormArray>(
-      this.mainChartForm.get(['tabs', tabsIndex, 'tab', tabIndex, 'points'])
+      this.mainChartForm.get(['tabs', tabsIndex, 'pointsInTab'])
     );
 
     control.removeAt(pointIndex);
-  }
-
-  public changeMatGroup(): void {
-    this.tabNameInput.reset();
   }
 
   public onSubmit(form: FormGroup): void {}
@@ -94,16 +80,11 @@ export class ChartFormComponent implements OnInit {
   private initTab(): FormGroup {
     return new FormGroup({
       tabName: new FormControl(this.tabNameInputValue),
-      tab: new FormArray([this.initPoints()]),
-    });
-  }
-  private initPoints(): FormGroup {
-    return new FormGroup({
-      points: new FormArray([this.initPoint()]),
+      pointsInTab: new FormArray([this.initPointInTab()]),
     });
   }
 
-  private initPoint(): FormGroup {
+  private initPointInTab(): FormGroup {
     return new FormGroup({
       point: new FormControl(),
     });

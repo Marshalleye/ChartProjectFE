@@ -3,19 +3,19 @@
     <!-- No. Column -->
     <ng-container matColumnDef="pointNumber">
       <th mat-header-cell *matHeaderCellDef class="color-black"> No. </th>
-      <td mat-cell *matCellDef="let element" class="text-light"> {{element.point?.pointNumber}} </td>
+      <td mat-cell *matCellDef="let element" class="text-light"> {{element?.pointNumber}} </td>
     </ng-container>
 
     <!-- xAxis Column -->
     <ng-container matColumnDef="xAxis">
       <th mat-header-cell *matHeaderCellDef class="color-black"> xAxis </th>
-      <td mat-cell *matCellDef="let element" class="text-light"> {{element.point?.xAxis}} </td>
+      <td mat-cell *matCellDef="let element" class="text-light"> {{element?.xAxis}} </td>
     </ng-container>
 
     <!-- yAxis Column -->
     <ng-container matColumnDef="yAxis">
       <th mat-header-cell *matHeaderCellDef class="color-black"> yAxis </th>
-      <td mat-cell *matCellDef="let element" class="text-light"> {{element.point?.yAxis}} </td>
+      <td mat-cell *matCellDef="let element" class="text-light"> {{element?.yAxis}} </td>
     </ng-container>
 
 

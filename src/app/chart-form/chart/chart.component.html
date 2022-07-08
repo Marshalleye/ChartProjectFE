@@ -1,5 +1,5 @@
 <div *ngIf="chartDataCollection">
-  <ngx-charts-line-chart (window:resize)="onResize($event)" [view]="view" [scheme]="colorScheme"
+  <ngx-charts-line-chart (window:resize)="onResize($event)" [view]="view" [scheme]="chartPropertyConfig.colorScheme"
     [legend]="chartPropertyConfig.legend" [showXAxisLabel]="chartPropertyConfig.showXAxisLabel"
     [showYAxisLabel]="chartPropertyConfig.showYAxisLabel" [xAxis]="chartPropertyConfig.xAxis"
     [yAxis]="chartPropertyConfig.yAxis" [xAxisLabel]="chartPropertyConfig.xAxisLabel"

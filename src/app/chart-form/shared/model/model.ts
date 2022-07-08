@@ -1,22 +1,18 @@
-export interface ChartAxisPoint {
-  pointNumber: number;
-  xAxis: number;
-  yAxis: number;
-}
-
-export interface ChartPointModel {
-  point: ChartAxisPoint;
-}
-
-export interface TabModel {
-  points: ChartPointModel[];
+export interface TabsModel {
+  tabs: TabData[];
 }
 
 export interface TabData {
   tabName: string;
-  tab: TabModel[];
+  pointsInTab: ChartPointControlModel[];
 }
 
-export interface TabsModel {
-  tabs: TabData[];
+export interface ChartPointControlModel {
+  point: ChartAxisPoint;
+}
+
+export interface ChartAxisPoint {
+  pointNumber: number;
+  xAxis: number;
+  yAxis: number;
 }
