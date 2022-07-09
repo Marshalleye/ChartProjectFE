@@ -3,15 +3,15 @@ import {
   ChartAxisPoint,
   ChartPointControlModel,
   TabsModel,
-} from '../shared/model/model';
+} from '../shared/model/tabs.model';
 
 @Component({
-  selector: 'app-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss'],
+  selector: 'app-chart-table',
+  templateUrl: './chart-table.component.html',
+  styleUrls: ['./chart-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TableComponent {
+export class ChartTableComponent {
   @Input() public tabNumber: number;
   @Input() public set dataSource(tableData: TabsModel | null) {
     if (!tableData) {

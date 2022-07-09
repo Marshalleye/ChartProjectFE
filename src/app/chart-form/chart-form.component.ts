@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { TabsModel } from './shared/model/model';
+import { ChartAPIService } from '../chartAPI/service/chart-api.service';
+import { TabsModel } from './shared/model/tabs.model';
 
 @Component({
   selector: 'app-chart-form',
@@ -18,12 +19,15 @@ export class ChartFormComponent implements OnInit {
     return this.tabNameInput.value;
   }
 
+  constructor(private chartAPIService: ChartAPIService) {}
+
   public ngOnInit(): void {
     this.mainChartForm = new FormGroup({
       tabs: new FormArray([this.initTab()]),
     });
 
     this.dataSource$ = this.mainChartForm.valueChanges;
+    this.chartAPIService.getAllPost().subscribe(console.log);
   }
 
   public addTab(): void {

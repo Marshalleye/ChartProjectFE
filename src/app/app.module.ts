@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Provider } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -15,16 +15,24 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { TableComponent } from './chart-form/table/table.component';
+import { ChartTableComponent } from './chart-form/chart-table/chart-table.component';
 import { ChartFormComponent } from './chart-form/chart-form.component';
 import { CustomInputComponent } from './chart-form/custom-input/custom-input.component';
 import { ChartComponent } from './chart-form/chart/chart.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpRelativeApiUrlInterceptor } from './http/http-interceptor/http-relative-api-url.interceptor';
+
+const INTERCEPTOR_PROVIDER: Provider = {
+  provide: HTTP_INTERCEPTORS,
+  useClass: HttpRelativeApiUrlInterceptor,
+  multi: true,
+};
 
 @NgModule({
   declarations: [
     AppComponent,
     ChartFormComponent,
-    TableComponent,
+    ChartTableComponent,
     ChartComponent,
     CustomInputComponent,
   ],
@@ -43,8 +51,9 @@ import { ChartComponent } from './chart-form/chart/chart.component';
     MatCheckboxModule,
     FlexLayoutModule,
     NgxChartsModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [INTERCEPTOR_PROVIDER],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

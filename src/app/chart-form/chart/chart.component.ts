@@ -3,7 +3,7 @@ import {
   ChartPointControlModel,
   TabData,
   TabsModel,
-} from '../shared/model/model';
+} from '../shared/model/tabs.model';
 import { chartConfigProperty } from './model/chart-config';
 import { ChartAxisData, ChartDataCollectionModel } from './model/chart-model';
 
