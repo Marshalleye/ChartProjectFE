@@ -18,9 +18,10 @@
     </div>
     <!-- Add Tab button end -->
 
-    <div formArrayName="tabs">
+    <div formArrayName="tabs" fxLayoutGap="15px">
       <mat-tab-group>
         <mat-tab *ngFor="let tabs of getTabs(mainChartForm); let tabsIndex = index" [label]="tabsNameArr[tabsIndex]">
+
           <div class="chart-points-container" fxLayout="column" fxLayoutGap="15px">
 
             <!-- Delete Tab button start -->
@@ -45,10 +46,13 @@
             </div>
           </div>
 
+          <button mat-raised-button color="accent" type="submit" class="chart-save-form-btn">Save Form</button>
+
           <!-- Table start -->
           <div>
             <h2 class="text-primary">Table:</h2>
-            <app-chart-table [tabNumber]="tabsIndex" [dataSource]="dataSource$ | async"></app-chart-table>
+            <app-chart-table [tabNumber]="tabsIndex" [dataSource]="(dataSource$ | async) || resolverData">
+            </app-chart-table>
           </div>
           <!-- Table end -->
 
@@ -61,7 +65,7 @@
   <!-- Chart start -->
   <div fxLayout="column" fxLayoutGap="45px">
     <h2 class="text-primary">Chart:</h2>
-    <app-chart [dataSource]="dataSource$ | async" [tabName]="tabsNameArr">
+    <app-chart [dataSource]="(dataSource$ | async) || resolverData" [tabName]="tabsNameArr">
     </app-chart>
   </div>
   <!-- Chart start -->

@@ -5,8 +5,8 @@ import {
 } from 'src/app/chart-form/shared/model/tabs.model';
 
 export interface TabsModelMongoDBResponse extends TabsModel {
-  __v: number;
   _id: string;
+  __v?: number;
 }
 
 export interface TabDataMongoDBResponse extends TabData {

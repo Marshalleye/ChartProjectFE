@@ -48,11 +48,14 @@ export class CustomInputComponent implements OnInit {
 
   writeValue(data: any): void {
     if (data) {
-      this.pointForm.setValue({
-        pointNumber: this.pointNumber + 1,
-        xAxis: data.xAxis,
-        yAxis: data.yAxis,
-      });
+      this.pointForm.setValue(
+        {
+          pointNumber: this.pointNumber + 1,
+          xAxis: data.xAxis,
+          yAxis: data.yAxis,
+        },
+        { emitEvent: false }
+      );
     }
   }
 
